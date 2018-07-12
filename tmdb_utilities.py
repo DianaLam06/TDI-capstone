@@ -1,4 +1,7 @@
 from tmdb_config import API_KEY
+import requests
+from io import BytesIO
+from PIL import Image
 
 def getMovieID(response):
     '''
