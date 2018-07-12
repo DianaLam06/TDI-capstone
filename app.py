@@ -61,7 +61,16 @@ def getRating(deets):
             return item.values()[1][1]['certification']
         else:
             return 'No rating'
+
+def getGenre(deets):
+    '''
+    input: deets, a json containing movie details
+    output: dictionary with genres
+    '''
     
+    return [ i['name'] for i in deets['genres']]
+    
+        
 
 def getAPIdata(string):
     '''
@@ -75,7 +84,7 @@ def getAPIdata(string):
     details = getAPIwID(id_num_)
     
     rating = getRating(details)
-    #genre = getGenre(details)
+    genre = getGenre(details)
     #production = getProduction(details)
     #poster = getPoster(response)
     
@@ -86,7 +95,7 @@ def getAPIdata(string):
     #all_details['poster'] = poster
     #all_details['production'] = production
     
-    return rating 
+    return genre 
 
 @lru_cache()
 
