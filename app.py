@@ -36,6 +36,10 @@ def getMovieID(response):
     movie_json = response.json()
     return movie_json['results'][0]['id']
 
+
+
+# In[12]:
+
 def getAPIwID(id_num):
     '''
     input: the id number (int) of the move to read into the API to get details
@@ -44,8 +48,7 @@ def getAPIwID(id_num):
     response_full = requests.get("https://api.themoviedb.org/3/movie/" + str(id_num) + \
                             "?api_key=900a489ed1a09a120f925244bffb3f34&language=en-US&append_to_response=details,keywords,release_dates")
     '''
-    response_full = requests.get("https://api.themoviedb.org/3/movie/" + str(id_num) + \
-                            "?api_key=900a489ed1a09a120f925244bffb3f34&language=en-US&append_to_response=details,keywords,release_dates")
+    response_full = requests.get("https://api.themoviedb.org/3/movie/" + str(id_num) +                             "?api_key=900a489ed1a09a120f925244bffb3f34&language=en-US&append_to_response=details,keywords,videos,release_dates")
     
     return response_full.json()
 
@@ -59,8 +62,8 @@ def getRating(deets):
     for item in deets['release_dates']['results']:
         if item.values()[0] == u'US':
             return item.values()[1][1]['certification']
-        else:
-            return 'No rating'
+    
+
 
 def getGenre(deets):
     '''
@@ -70,7 +73,37 @@ def getGenre(deets):
     
     return [ i['name'] for i in deets['genres']]
     
-        
+    
+
+
+# In[9]:
+
+
+def getProduction(deets):
+    '''
+    input: deets, a json containing movie details from ID grab
+    output: the production companies involved
+    '''
+    return  [ i['name'] for i in deets['production_companies']]
+
+    
+
+
+# In[10]:
+
+
+def getPoster(resp):
+    '''
+    input: the first API response from search
+    output: picture of the movie poster
+    '''
+    poster_path = resp.json()['results'][0]['poster_path']
+    full_path = u"https://image.tmdb.org/t/p/w342/" + poster_path    
+    URL = requests.get(full_path)
+    img = Image.open(BytesIO(URL.content))
+    return img
+
+
 
 def getAPIdata(string):
     '''
@@ -85,17 +118,19 @@ def getAPIdata(string):
     
     rating = getRating(details)
     genre = getGenre(details)
-    #production = getProduction(details)
-    #poster = getPoster(response)
+    production = getProduction(details)
+    poster = getPoster(response)
     
     all_details = {}
     
-    #all_details['rating'] = rating
-    #all_details['genre'] = genre
-    #all_details['poster'] = poster
-    #all_details['production'] = production
+    all_details['rating'] = rating
+    all_details['genre'] = genre
+    all_details['poster'] = poster
+    all_details['production'] = production
     
-    return genre 
+    return "test me"
+    #return details
+    #return response
 
 @lru_cache()
 
@@ -107,7 +142,7 @@ def index():
     args = flask.request.args
 
     # Get all the form arguments in the url with defaults
-    inputted_string = getitem(args, 'movie_name', 'Annihilation')
+    inputted_string = getitem(args, 'movie_name', 'Annihilation ')
 
     result_dict = getAPIdata(inputted_string)
 
