@@ -86,7 +86,7 @@ def getAPIdata(string):
     #all_details['poster'] = poster
     #all_details['production'] = production
     
-    return details['release_dates']
+    return rating 
 
 @lru_cache()
 
