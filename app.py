@@ -107,7 +107,7 @@ def index():
     
     html = flask.render_template(
         'embed.html',
-        movie_string="hello"
+        movie_string=result_dict
     )
     
     return html
