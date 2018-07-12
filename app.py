@@ -1,5 +1,5 @@
 from __future__ import print_function
-from tmdb_utilities import *
+#from tmdb_utilities import *
 
 try:
     from functools import lru_cache
@@ -18,7 +18,7 @@ import flask
 import pandas as pd
 from os.path import dirname, join
 import requests
-from io import BytesIO
+#from io import BytesIO
 
 app = flask.Flask(__name__)
 
@@ -74,19 +74,19 @@ def getAPIdata(string):
     id_num_ = getMovieID(response)
     details = getAPIwID(id_num_)
     
-    rating = getRating(details)
+    #rating = getRating(details)
     #genre = getGenre(details)
     #production = getProduction(details)
     #poster = getPoster(response)
     
     all_details = {}
     
-    all_details['rating'] = rating
+    #all_details['rating'] = rating
     #all_details['genre'] = genre
     #all_details['poster'] = poster
     #all_details['production'] = production
     
-    return all_details
+    return "test"
 
 @lru_cache()
 
