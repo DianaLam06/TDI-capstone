@@ -19,6 +19,7 @@ import pandas as pd
 from os.path import dirname, join
 import requests
 from io import BytesIO
+from PIL import Image
 
 app = flask.Flask(__name__)
 
@@ -88,8 +89,16 @@ def getProduction(deets):
 
     
 
-
-# In[10]:
+def getPoster(resp):
+    '''
+    input: the first API response from search
+    output: picture of the movie poster
+    '''
+    poster_path = resp.json()['results'][0]['poster_path']
+    full_path = u"https://image.tmdb.org/t/p/w342/" + poster_path    
+    URL = requests.get(full_path)
+    img = Image.open(BytesIO(URL.content))
+    return img
 
 
 
