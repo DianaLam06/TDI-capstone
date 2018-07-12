@@ -86,7 +86,7 @@ def getAPIdata(string):
     #all_details['poster'] = poster
     #all_details['production'] = production
     
-    return "test"
+    return id_num_
 
 @lru_cache()
 
