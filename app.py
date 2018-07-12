@@ -45,7 +45,7 @@ def getAPIwID(id_num):
                             "?api_key=900a489ed1a09a120f925244bffb3f34&language=en-US&append_to_response=details,keywords,release_dates")
     '''
     response_full = requests.get("https://api.themoviedb.org/3/movie/" + str(id_num) + \
-                            "?api_key=900a489ed1a09a120f925244bffb3f34&language=en-US&append_to_response=details,keywords,videos,release_dates")
+                            "?api_key=900a489ed1a09a120f925244bffb3f34&language=en-US&append_to_response=details,keywords,release_dates")
     
     return response_full.json()
 
@@ -107,7 +107,7 @@ def index():
     
     html = flask.render_template(
         'embed.html',
-        movie_string=result_dict['rating']
+        movie_string="hello"
     )
     
     return html
