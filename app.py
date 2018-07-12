@@ -49,6 +49,18 @@ def getAPIwID(id_num):
     
     return response_full.json()
 
+def getRating(deets):
+    '''
+    input: deets, a json containing the movie details
+    output: dictionary with certification
+    '''
+   
+    
+    for item in deets['release_dates']['results']:
+        if item.values()[0] == u'US':
+            return item.values()[1][1]['certification']
+    
+
 def getAPIdata(string):
     '''
     input: a string, which is a movie name
@@ -79,7 +91,7 @@ def getAPIdata(string):
 
 @app.route('/')
 def index():
-
+    API_KEY = 900a489ed1a09a120f925244bffb3f34
     # Grab the inputs arguments from the URL
     args = flask.request.args
 
