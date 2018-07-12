@@ -74,7 +74,7 @@ def getAPIdata(string):
     id_num_ = getMovieID(response)
     details = getAPIwID(id_num_)
     
-    #rating = getRating(details)
+    rating = getRating(details)
     #genre = getGenre(details)
     #production = getProduction(details)
     #poster = getPoster(response)
