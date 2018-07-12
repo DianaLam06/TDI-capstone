@@ -1,4 +1,5 @@
 from __future__ import print_function
+from tmdb_utilities import *
 
 try:
     from functools import lru_cache
@@ -25,7 +26,6 @@ def getitem(obj, item, default):
     else:
         return obj[item]
 
-
 @lru_cache()
 
 
@@ -38,13 +38,14 @@ def index():
     # Get all the form arguments in the url with defaults
     inputted_string = getitem(args, 'movie_name', 'Annihilation')
 
+    result_dict = getAPIdata(inputted_string)
 
     # resources = INLINE.render()
     # script, div = components(fig)
     
     html = flask.render_template(
         'embed.html',
-        movie_string=inputted_string
+        movie_string=result_dict['rating']
     )
     
     return html
