@@ -17,6 +17,8 @@ except ImportError:
 import flask
 import pandas as pd
 from os.path import dirname, join
+import requests
+from io import BytesIO
 
 app = flask.Flask(__name__)
 
@@ -25,6 +27,52 @@ def getitem(obj, item, default):
         return default
     else:
         return obj[item]
+
+def getMovieID(response):
+    '''
+    input: response from requests.get, used to get numeric id of movie
+    output: MovieID key (int)
+    '''
+    movie_json = response.json()
+    return movie_json['results'][0]['id']
+
+def getAPIwID(id_num):
+    '''
+    input: the id number (int) of the move to read into the API to get details
+    output: a json with movie details
+    
+    response_full = requests.get("https://api.themoviedb.org/3/movie/" + str(id_num) + \
+                            "?api_key=900a489ed1a09a120f925244bffb3f34&language=en-US&append_to_response=details,keywords,release_dates")
+    '''
+    response_full = requests.get("https://api.themoviedb.org/3/movie/" + str(id_num) + \
+                            "?api_key=900a489ed1a09a120f925244bffb3f34&language=en-US&append_to_response=details,keywords,videos,release_dates")
+    
+    return response_full.json()
+
+def getAPIdata(string):
+    '''
+    input: a string, which is a movie name
+    output: movie details from API in a dict
+    '''
+    string_url = "+".join(string.split())
+    response = requests.get("https://api.themoviedb.org/3/search/movie?api_key=900a489ed1a09a120f925244bffb3f34&query=" + string_url)
+    
+    id_num_ = getMovieID(response)
+    details = getAPIwID(id_num_)
+    
+    rating = getRating(details)
+    #genre = getGenre(details)
+    #production = getProduction(details)
+    #poster = getPoster(response)
+    
+    all_details = {}
+    
+    all_details['rating'] = rating
+    #all_details['genre'] = genre
+    #all_details['poster'] = poster
+    #all_details['production'] = production
+    
+    return all_details
 
 @lru_cache()
 
