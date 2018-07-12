@@ -1,7 +1,7 @@
 from tmdb_config import API_KEY
 import requests
 from io import BytesIO
-from PIL import Image
+#from PIL import Image
 
 def getMovieID(response):
     '''
@@ -55,18 +55,18 @@ def getProduction(deets):
     output: the production companies involved
     '''
     return  [ i['name'] for i in deets['production_companies']]
-
+'''
 def getPoster(resp):
-    '''
+   
     input: the first API response from search
     output: picture of the movie poster
-    '''
+   
     poster_path = resp.json()['results'][0]['poster_path']
     full_path = u"https://image.tmdb.org/t/p/w342/" + poster_path    
     URL = requests.get(full_path)
     img = Image.open(BytesIO(URL.content))
     return img    
-
+'''
 
 def getAPIdata(string):
     '''
@@ -82,13 +82,13 @@ def getAPIdata(string):
     rating = getRating(details)
     genre = getGenre(details)
     production = getProduction(details)
-    poster = getPoster(response)
+    #poster = getPoster(response)
     
     all_details = {}
     
     all_details['rating'] = rating
     all_details['genre'] = genre
-    all_details['poster'] = poster
+    #all_details['poster'] = poster
     all_details['production'] = production
     
     return all_details
