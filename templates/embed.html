@@ -6,45 +6,20 @@
 
     <title>Embed Demo</title>
 
-    {{ resources|indent(4)|safe }}
-
-    {{ plot_script|indent(4)|safe }}
-  </head>
+    </head>
   <body>
     <!-- A simple form for changing the graph -->
     <p> Select your settings: </p>
     <form name="color_button" method='GET'>
-        Color:
-        <select name="color">
-            <option {{ "selected" if color|indent(4)|safe == "Red" }} value="Red">Red</option>
-            <option {{ "selected" if color|indent(4)|safe == "Green" }} value="Green">Green</option>
-            <option {{ "selected" if color|indent(4)|safe == "Blue" }} value="Blue">Blue</option>
-            <option {{ "selected" if color|indent(4)|safe == "Black" }} value="Black">Black</option>
-        </select>
-        <br>
         <br>
         Ticker:
-        <input type="text" name="stock" value="{{stock}}">
-        <br>
-        <br>
-        Month:
-        <select name="month">
-            <option {{ "selected" if month|indent(12)|safe == "Jan" }} value="Jan">Jan</option>
-            <option {{ "selected" if month|indent(12)|safe == "Feb" }} value="Feb">Feb</option>
-            <option {{ "selected" if month|indent(12)|safe == "Mar" }} value="Mar">Mar</option>
-            <option {{ "selected" if month|indent(12)|safe == "Apr" }} value="Apr">Apr</option>
-            <option {{ "selected" if month|indent(12)|safe == "May" }} value="May">May</option>
-            <option {{ "selected" if month|indent(12)|safe == "Jun" }} value="Jun">Jun</option>
-            <option {{ "selected" if month|indent(12)|safe == "Jul" }} value="Jul">Jul</option>
-            <option {{ "selected" if month|indent(12)|safe == "Aug" }} value="Aug">Aug</option>
-            <option {{ "selected" if month|indent(12)|safe == "Sep" }} value="Sep">Sep</option>
-            <option {{ "selected" if month|indent(12)|safe == "Oct" }} value="Oct">Oct</option>
-            <option {{ "selected" if month|indent(12)|safe == "Nov" }} value="Nov">Nov</option>
-            <option {{ "selected" if month|indent(12)|safe == "Dec" }} value="Dec">Dec</option>
-        </select>
+        <input type="text" name="movie_name" value="{{movie_name}}">
         <br>
         <button type="submit">Submit</button>
     </form>
-    {{ plot_div|indent(4)|safe }}
-  </body>
+    <br>
+    {{ movie_string }}
+    <br>
+    
+    </body>
 </html>
