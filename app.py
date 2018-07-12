@@ -1,5 +1,5 @@
 from __future__ import print_function
-from tmdb_utilities import *
+#from tmdb_utilities import *
 
 try:
     from functools import lru_cache
