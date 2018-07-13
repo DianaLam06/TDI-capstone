@@ -142,7 +142,7 @@ def index():
     args = flask.request.args
 
     # Get all the form arguments in the url with defaults
-    inputted_string = getitem(args, 'movie_name', 'xxyyzz')
+    inputted_string = getitem(args, 'movie_name', 'annihilation')
 
     result_dict = getAPIdata(inputted_string)
 
