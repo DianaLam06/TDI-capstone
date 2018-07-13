@@ -149,7 +149,11 @@ def index():
     
     html = flask.render_template(
         'embed.html',
-        movie_string=result_dict
+        movie_string=result_dict,
+        movie_name = inputted_string,
+        movie_rating = result_dict['rating']
+        movie_genre = result_dict['genre']
+        
     )
     
     return html
