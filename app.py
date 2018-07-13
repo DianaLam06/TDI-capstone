@@ -69,10 +69,12 @@ def getRating(deets):
 def getGenre(deets):
     '''
     input: deets, a json containing movie details
-    output: dictionary with genres
-    '''
+    output: single string with all genres, separated by commas
+    ''' 
+    genre_list = [ i['name'] for i in deets['genres']]
+    genre_string = ", ".join(genre_list)
     
-    return [ i['name'] for i in deets['genres']]
+    return genre_string
     
     
 
@@ -83,9 +85,9 @@ def getGenre(deets):
 def getProduction(deets):
     '''
     input: deets, a json containing movie details from ID grab
-    output: the production companies involved
+    output: the production companies involved in a string, separated by commas
     '''
-    return  [ i['name'] for i in deets['production_companies']]
+    return ", ".join([ i['name'] for i in deets['production_companies']])
 
     
 
@@ -98,7 +100,7 @@ def getPoster(resp):
     full_path = u"https://image.tmdb.org/t/p/w342/" + poster_path    
     URL = requests.get(full_path)
     img = Image.open(BytesIO(URL.content))
-    return img
+    return full_path
 
 
 
@@ -123,9 +125,9 @@ def getAPIdata(string):
     
     all_details['rating'] = rating
     all_details['genre'] = genre
-    #all_details['poster'] = poster
+    all_details['poster'] = poster
     all_details['production'] = production
-    poster = '<img src="https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg" >'
+   
     #return details
     return all_details
     #return response
@@ -149,10 +151,10 @@ def index():
     
     html = flask.render_template(
         'embed.html',
-        movie_string=result_dict,
-        movie_name = inputted_string,
         movie_rating = result_dict['rating'],
-        movie_genre = result_dict['genre']
+        movie_genre = result_dict['genre'],
+        movie_production = result_dict['production'],
+        movie_poster = result_dict['poster']
         
     )
     
