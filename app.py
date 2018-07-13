@@ -127,7 +127,7 @@ def getAPIdata(string):
     all_details['production'] = production
     poster = '<img src="https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg" >'
     #return details
-    return all_details.items()
+    return all_details
     #return response
 
 @lru_cache()
