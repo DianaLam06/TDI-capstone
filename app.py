@@ -117,7 +117,7 @@ def getAPIdata(string):
     rating = getRating(details)
     genre = getGenre(details)
     production = getProduction(details)
-    #poster = getPoster(response)
+    poster = getPoster(response)
     
     all_details = {}
     
