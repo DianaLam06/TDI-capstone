@@ -123,7 +123,7 @@ def getAPIdata(string):
     
     all_details['rating'] = rating
     all_details['genre'] = genre
-    #all_details['poster'] = poster
+    all_details['poster'] = poster
     all_details['production'] = production
     
     #return details
