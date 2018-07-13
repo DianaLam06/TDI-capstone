@@ -8,6 +8,9 @@
 
     </head>
   <body>
+      <table border="0">
+          <tr>
+              <td>
     <!-- A simple form for changing the graph -->
     <h2> Enter movie inspired by a novel: </h2>
     <form name="color_button" method='GET'>
@@ -24,13 +27,16 @@
     <br>
     <b>Genre:</b> {{ movie_genre }}
     <br>
-    <b>Production companies:<b> {{ movie_production }}
+    <b>Production companies:</b> {{ movie_production }}
     <br>
     <br>
-    <b>Number of months to wait:<b> {{ movie_wait_time }}
-    <br>
-    <br>
+      <b>Number of months to wait: <h3>{{ movie_wait_time }} </h3> </b>
+              </td>
+              
+              <td>
     <img src="{{movie_poster}}" >
-    
+              </td>
+          </tr>
+      </table>
     </body>
 </html>
