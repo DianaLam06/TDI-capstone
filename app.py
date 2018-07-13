@@ -110,11 +110,12 @@ def getAPIdata(string):
     input: a string, which is a movie name, if input is xxyyzz then output blanks with a non commital picture for poster url
     output: movie details from API in a dict
     '''
-    if string == "xxyyzz":
+    if string == " ":
         rating = " "
         genre = " "
         production = " "
         poster = 'http://4.bp.blogspot.com/--vVGyhWo610/VLcuSaQZROI/AAAAAAAAADg/6mYoDt05hJg/s1600/booksvsmovies.jpg'
+        wait_time = " "
      
     else:
 
@@ -128,6 +129,7 @@ def getAPIdata(string):
         genre = getGenre(details)
         production = getProduction(details)
         poster = getPoster(response)
+        wait_time = 2
 
     all_details = {}
     
@@ -135,6 +137,7 @@ def getAPIdata(string):
     all_details['genre'] = genre
     all_details['poster'] = poster
     all_details['production'] = production
+    all_details['wait_time'] = wait_time
    
   
     return all_details
@@ -150,7 +153,7 @@ def index():
     args = flask.request.args
 
     # Get all the form arguments in the url with defaults
-    inputted_string = getitem(args, 'movie_name', 'xxyyzz')
+    inputted_string = getitem(args, 'movie_name', ' ')
 
     result_dict = getAPIdata(inputted_string)
 
@@ -164,6 +167,7 @@ def index():
         movie_genre = result_dict['genre'],
         movie_production = result_dict['production'],
         movie_poster = result_dict['poster']
+        movie_wait_time = result_dict['wait_time']
         
     )
     
