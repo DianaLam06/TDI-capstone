@@ -155,7 +155,7 @@ def index():
         movie_rating = result_dict['rating'],
         movie_genre = result_dict['genre'],
         movie_production = result_dict['production'],
-        movie_poster = ' '
+        movie_poster = 'http://4.bp.blogspot.com/--vVGyhWo610/VLcuSaQZROI/AAAAAAAAADg/6mYoDt05hJg/s1600/booksvsmovies.jpg'
         
     )
     
