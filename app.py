@@ -118,12 +118,7 @@ def getAPIdata(string):
         production = " "
         poster = 'http://4.bp.blogspot.com/--vVGyhWo610/VLcuSaQZROI/AAAAAAAAADg/6mYoDt05hJg/s1600/booksvsmovies.jpg'
         wait_time = " "
-        
-    elif string.lower() == "crazy rich asians":
-        rating = "PG-13"
-        production = "Color Force, SK Global, Warner Bros."
-        genre = "Comedy"
-
+       
      
     else:
 
@@ -138,6 +133,12 @@ def getAPIdata(string):
         production = getProduction(details)
         poster = getPoster(response)
         wait_time = 6
+        
+    if string.lower() == "crazy rich asians":
+        rating = "PG-13"
+        production = "Color Force, SK Global, Warner Bros."
+        
+
 
     all_details = {}
     
