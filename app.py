@@ -166,7 +166,7 @@ def index():
         movie_rating = result_dict['rating'],
         movie_genre = result_dict['genre'],
         movie_production = result_dict['production'],
-        movie_poster = result_dict['poster']
+        movie_poster = result_dict['poster'],
         movie_wait_time = result_dict['wait_time']
         
     )
