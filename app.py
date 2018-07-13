@@ -123,11 +123,11 @@ def getAPIdata(string):
     
     all_details['rating'] = rating
     all_details['genre'] = genre
-    all_details['poster'] = poster
+    #all_details['poster'] = poster
     all_details['production'] = production
-    
+    poster = '<img src="https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg" >'
     #return details
-    return all_details
+    return poster
     #return response
 
 @lru_cache()
