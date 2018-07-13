@@ -107,20 +107,28 @@ def getPoster(resp):
 
 def getAPIdata(string):
     '''
-    input: a string, which is a movie name
+    input: a string, which is a movie name, if input is xxyyzz then output blanks with a non commital picture for poster url
     output: movie details from API in a dict
     '''
-    string_url = "+".join(string.split())
-    response = requests.get("https://api.themoviedb.org/3/search/movie?api_key=900a489ed1a09a120f925244bffb3f34&query=" + string_url)
-    
-    id_num_ = getMovieID(response)
-    details = getAPIwID(id_num_)
-    
-    rating = getRating(details)
-    genre = getGenre(details)
-    production = getProduction(details)
-    poster = getPoster(response)
-    
+    if string == "xxyyzz":
+        rating = " "
+        genre = " "
+        production = " "
+        poster = 'http://4.bp.blogspot.com/--vVGyhWo610/VLcuSaQZROI/AAAAAAAAADg/6mYoDt05hJg/s1600/booksvsmovies.jpg'
+     
+    else:
+
+        string_url = "+".join(string.split())
+        response = requests.get("https://api.themoviedb.org/3/search/movie?api_key=900a489ed1a09a120f925244bffb3f34&query=" + string_url)
+
+        id_num_ = getMovieID(response)
+        details = getAPIwID(id_num_)
+
+        rating = getRating(details)
+        genre = getGenre(details)
+        production = getProduction(details)
+        poster = getPoster(response)
+
     all_details = {}
     
     all_details['rating'] = rating
@@ -128,9 +136,9 @@ def getAPIdata(string):
     all_details['poster'] = poster
     all_details['production'] = production
    
-    #return details
+  
     return all_details
-    #return response
+    
 
 @lru_cache()
 
@@ -142,7 +150,7 @@ def index():
     args = flask.request.args
 
     # Get all the form arguments in the url with defaults
-    inputted_string = getitem(args, 'movie_name', 'annihilation')
+    inputted_string = getitem(args, 'movie_name', 'xxyyzz')
 
     result_dict = getAPIdata(inputted_string)
 
@@ -155,7 +163,7 @@ def index():
         movie_rating = result_dict['rating'],
         movie_genre = result_dict['genre'],
         movie_production = result_dict['production'],
-        movie_poster = 'http://4.bp.blogspot.com/--vVGyhWo610/VLcuSaQZROI/AAAAAAAAADg/6mYoDt05hJg/s1600/booksvsmovies.jpg'
+        movie_poster = result_dict['poster']
         
     )
     
