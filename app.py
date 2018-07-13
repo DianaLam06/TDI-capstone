@@ -170,7 +170,7 @@ def index():
     
     html = flask.render_template(
         'embed.html',
-        movie_name_nice = inputted_string.Title(),
+        movie_name_nice = inputted_string.title(),
         movie_rating = result_dict['rating'],
         movie_genre = result_dict['genre'],
         movie_production = result_dict['production'],
