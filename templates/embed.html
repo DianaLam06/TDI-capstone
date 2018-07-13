@@ -9,7 +9,7 @@
     </head>
   <body>
     <!-- A simple form for changing the graph -->
-    <p> Enter movie inspired by a novel: </p>
+    <h2> Enter movie inspired by a novel: </h2>
     <form name="color_button" method='GET'>
         <br>
          Movie Title:
@@ -18,15 +18,16 @@
         <button type="submit">Submit</button>
     </form>
     <br>
-    Movie Title: {{ movie_name_nice }}
+    <b>Movie Title:</b> {{ movie_name_nice }}
     <br>
-    Rating: {{ movie_rating }}
+    <b>Rating:</b> {{ movie_rating }}
     <br>
-     Genre: {{ movie_genre }}
+    <b>Genre:</b> {{ movie_genre }}
     <br>
-      Production companies: {{ movie_production }}
+    <b>Production companies:<b> {{ movie_production }}
     <br>
-      Number of months to wait: {{ movie_wait_time }}
+    <br>
+    <b>Number of months to wait:<b> {{ movie_wait_time }}
     <br>
     <br>
     <img src="{{movie_poster}}" >

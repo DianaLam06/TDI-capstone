@@ -1,5 +1,7 @@
 from __future__ import print_function
 #from tmdb_utilities import *
+# need to figure out why atonement, the maze runner, and divergent are not working
+# may be multiple responses from first requests.get?
 
 try:
     from functools import lru_cache
@@ -129,7 +131,7 @@ def getAPIdata(string):
         genre = getGenre(details)
         production = getProduction(details)
         poster = getPoster(response)
-        wait_time = 2
+        wait_time = 6
 
     all_details = {}
     
