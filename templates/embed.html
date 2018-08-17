@@ -49,17 +49,11 @@ body, html {
 <button class="tablink" onclick="openPage('About', this, 'orange')">About</button>
 
 <div id="Home" class="tabcontent">
-  <h3>Home</h3>
-    <head>
-    <meta charset='utf-8' />
-    <meta http-equiv='content-type' content='text/html; charset=utf-8' />
-
-    <title>Buy or Borrow</title>
-
-    </head>
+  <h3>Buy or Borrow</h3>
+    
   <body>
         <center>
-      <h2> Enter movie inspired by a novel: </h2>
+      <h4> Enter movie inspired by a novel: </h4>
       
       <form name="color_button" method='GET'>
         <br>
@@ -85,7 +79,7 @@ body, html {
     <b>Production companies:</b> {{ movie_production }}
     <br>
     <br>
-      <b>Number of months to wait: <h3>{{ movie_wait_time }} </h3> </b>
+      <b>Number of months to wait: <h5>{{ movie_wait_time }} </h5> </b>
               </td>
               
               <td valign="middle", width="550">
@@ -102,12 +96,12 @@ body, html {
 
 <div id="Contact" class="tabcontent">
   <h3>Contact</h3>
-  <p>Get in touch, or swing by for a cup of coffee.</p>
+  <p>Fun facts about Diana</p>
 </div>
 
 <div id="About" class="tabcontent">
   <h3>About</h3>
-  <p>Who we are and what we do.</p>
+  <p>Motivation</p>
 </div>
 
 <script>
