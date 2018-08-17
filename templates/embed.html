@@ -37,28 +37,68 @@ body, html {
     height: 100%;
 }
 
-#Home {background-color: red;}
-#News {background-color: green;}
-#Contact {background-color: blue;}
-#About {background-color: orange;}
+#Home {background-color: white;}
+#Contact {background-color: white;}
+#About {background-color: white;}
 </style>
 </head>
 <body>
 
-<button class="tablink" onclick="openPage('Home', this, 'red')">Home</button>
-<button class="tablink" onclick="openPage('News', this, 'green')" id="defaultOpen">News</button>
+<button class="tablink" onclick="openPage('Home', this, 'red')" id="defaultOpen">Home</button>
 <button class="tablink" onclick="openPage('Contact', this, 'blue')">Contact</button>
 <button class="tablink" onclick="openPage('About', this, 'orange')">About</button>
 
 <div id="Home" class="tabcontent">
   <h3>Home</h3>
-  <p>Home is where the heart is..</p>
+    <head>
+    <meta charset='utf-8' />
+    <meta http-equiv='content-type' content='text/html; charset=utf-8' />
+
+    <title>Buy or Borrow</title>
+
+    </head>
+  <body>
+        <center>
+      <h2> Enter movie inspired by a novel: </h2>
+      
+      <form name="color_button" method='GET'>
+        <br>
+          <b>Movie Title:</b>
+        <input type="text" name="movie_name" value="{{movie_name}}">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+      
+        <table border="0" width="1100" cellspacing="5" cellpadding="5">
+          <tr>
+              <td valign="middle" width="550">
+    <!-- A simple form for changing the graph -->
+
+
+    <b>Movie Title:</b> {{ movie_name_nice }}
+    <br>
+    <b>Rating:</b> {{ movie_rating }}
+    <br>
+    <b>Genre:</b> {{ movie_genre }}
+    <br>
+    <b>Production companies:</b> {{ movie_production }}
+    <br>
+    <br>
+      <b>Number of months to wait: <h3>{{ movie_wait_time }} </h3> </b>
+              </td>
+              
+              <td valign="middle", width="550">
+    <img src="{{movie_poster}}" >
+              </td>
+          </tr>
+      </table>
+            
+      </center>
+      
+    </body>
 </div>
 
-<div id="News" class="tabcontent">
-  <h3>News</h3>
-  <p>Some news this fine day!</p> 
-</div>
 
 <div id="Contact" class="tabcontent">
   <h3>Contact</h3>
