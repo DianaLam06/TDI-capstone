@@ -97,8 +97,7 @@ body, html {
   <p>Diana Lam got her PhD in Biostatistics from the University of North Carolina at Chapel Hill.  She worked on statistical methodology releated to missing data and time-to-event analyses in randomized clinical trails with Gary Koch during her time at UNC. Recently, she completed a Fellowship at The Data Incubator and learned a lot of skills she never dreamed she'd have, such as the skills to make this web app.<br /><br />
     
     When she is not honing her new skills in Python and machine learning, Diana enjoys taking advantage of our civic institutions, such as reading in librairies, riding her bike in bike lanes, and playing Ultimate Frisbee in parks.</p>
-  <img src="Lam_Diana.JPG" alt="Picture of Diana" >
-    
+  <img src="{{ url_for('static', filename = 'Lam_Diana.jpg') }}" alt="Picture of Diana" >
     
 </div>
 
@@ -114,7 +113,10 @@ body, html {
     
  </p>
     <h3> Data </h3>
-    <p>  </p>
+    <p> I got a list of movies based on a novel by scraping a movie list from IMDB.com that had "based on a" in the keywords.   I then used the merged the list from IMDB.com with movie details from TMDB.com, as the TMDB API allowed me to easily look up movie details, such as the release date, movie-rating, genre, and keywords.  
+    <br /><br />
+        I then used the list of movie titles to filter the 6.6 GB of checkout data from the Seattle Public Library (SPL).  I used Spark to filter the large data set. As my outcome was the number of months you would have to wait past the movie release until the number of checkouts in SPL was less than the number of copies of the book for 2 consecutive months, I also needed ot know the inventory count of the books.  The count of books in the system was also available as a data set from SPL.  Different editions of the book were counted as the same book, assuming the content did not change drastically from edition to edition
+    </p>
 </div>
 
 <script>
