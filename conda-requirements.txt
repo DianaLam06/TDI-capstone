@@ -7,4 +7,3 @@ pip
 simplejson
 numpy
 pandas
-matplotlib
