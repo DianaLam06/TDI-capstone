@@ -23,6 +23,29 @@ import requests
 from io import BytesIO
 from PIL import Image
 
+import re
+import numpy as np
+import matplotlib as plt
+from collections import defaultdict, Counter
+
+from sklearn.model_selection import GridSearchCV
+from sklearn import base
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.feature_extraction import DictVectorizer
+from sklearn.pipeline import Pipeline, FeatureUnion
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
+from sklearn.decomposition import PCA
+from sklearn.decomposition import TruncatedSVD
+from sklearn.cluster import KMeans
+
+import matplotlib.pyplot as plt
+
+from wordcloud import WordCloud, STOPWORDS
+
 app = flask.Flask(__name__)
 
 def getitem(obj, item, default):
