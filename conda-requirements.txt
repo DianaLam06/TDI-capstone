@@ -5,10 +5,8 @@ flask
 jinja2
 pip
 simplejson
-re
 numpy
 pandas
 matplotlib
-collections
 sklearn
 wordcloud
