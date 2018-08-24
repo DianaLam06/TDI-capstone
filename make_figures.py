@@ -52,12 +52,7 @@ data_outcome = data_pre.dropna()
 
 #data = data_outcome.drop(labels=['num_months_wait'], axis = 1)
 data = data_outcome
-outcome = data_outcome['num_months_wait']
-
-
-outcome24  = outcome.apply(censor24)
-outcome12 = outcome.apply(censor12)
-binary12 = outcome.apply(makeBinary)
+binary12 = data_outcome['num_months_wait'].apply(makeBinary)
 
 
 
