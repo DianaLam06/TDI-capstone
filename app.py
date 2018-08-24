@@ -61,7 +61,7 @@ def plot():
     xs = range(3 + cluster_indiv)
     ys = [np.random.randint(1, 50) for x in xs]
 
-    axis.hist(
+    axis.imshow(wordcloud[cluster_indiv])
     canvas = FigureCanvas(fig)
     output = StringIO.StringIO()
     canvas.print_png(output)
