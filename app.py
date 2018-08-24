@@ -55,13 +55,19 @@ def plot():
     
     X_indiv = pd.DataFrame(d)
     cluster_indiv = km4.predict(X_indiv).item(0)
+    
     fig = Figure()
-    axis = fig.add_subplot(1, 1, 1)
-
-    xs = range(3 + cluster_indiv)
-    ys = [np.random.randint(1, 50) for x in xs]
+    axis = fig.add_subplot(2, 1, 1)
+    
 
     axis.imshow(wordcloud[cluster_indiv])
+    axis.axis("off")
+    
+    axis2 = fig.add_subplot(2, 1, 2)
+    axis2.imshow(wordcloud[2])
+    axis2.axis("off")
+    
+    
     canvas = FigureCanvas(fig)
     output = StringIO.StringIO()
     canvas.print_png(output)
