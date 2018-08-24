@@ -25,6 +25,7 @@ import datetime
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import StringIO
+import urllib
 
 from make_figures import *
 from get_TMDB import * 
@@ -46,8 +47,9 @@ def plot():
     
     args = flask.request.args
 
+
     # Get all the form arguments in the url with defaults
-    inputted_string = getitem(args, 'movie_name', ' ')
+    inputted_string = urllib.unquote(getitem(args, 'movie_name', ' '))
     result_dict = getAPIdata(inputted_string)
     
     d ={'genre_name':[result_dict['genre'].split(',')], 'certification' : [result_dict['rating'].split(',')]}
@@ -58,21 +60,16 @@ def plot():
     
     fig = Figure()
     axis = fig.add_subplot(2, 1, 1)
-    
-
     axis.imshow(wordcloud[cluster_indiv])
     axis.axis("off")
-    
-    axis2 = fig.add_subplot(2, 1, 2)
-    axis2.imshow(wordcloud[2])
-    axis2.axis("off")
-    
+       
     
     canvas = FigureCanvas(fig)
     output = StringIO.StringIO()
     canvas.print_png(output)
     response = flask.make_response(output.getvalue())
     response.mimetype = 'image/png'
+    
     return response
 
 @app.route('/')
@@ -91,7 +88,7 @@ def index():
     X_indiv = pd.DataFrame(d)
     cluster_indiv = km4.predict(X_indiv).item(0)
     predict_indiv = logistic_genre_cert_PCA.predict(X_indiv)
-    #result_dict['wait_time'] = predict_indiv
+    
     
     
     if datetime.datetime.today().year - result_dict['release_date'].year > 5 :
@@ -102,8 +99,8 @@ def index():
         result_dict['wait_time'] = 'Buy, expected wait longer than a year'
     else :
         result_dict['wait_time'] = 'No prediction, missing feature information'
-   
     result_dict['wait_time'] = cluster_indiv
+    
 
 
 
@@ -118,7 +115,8 @@ def index():
         movie_production = result_dict['production'],
         movie_poster = result_dict['poster'],
         movie_wait_time = result_dict['wait_time'],
-        movie_release_date = result_dict['release_date']
+        movie_release_date = result_dict['release_date'],
+        movie_perc = urllib.quote(inputted_string.title())
     )
     
     return html
