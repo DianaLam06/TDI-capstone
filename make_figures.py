@@ -192,7 +192,7 @@ km4 = Pipeline([
 
 
 km4.fit(data)
-km4.predict(X_indiv)
+
 
 data_all = pd.merge(data_check, km4_check, left_index = True, right_index = True)
 
