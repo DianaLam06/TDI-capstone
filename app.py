@@ -25,7 +25,8 @@ from PIL import Image
 
 import re
 import numpy as np
-import matplotlib as plt
+#import matplotlib as plt
+import matplotlib
 from collections import defaultdict, Counter
 
 from sklearn.model_selection import GridSearchCV
@@ -42,7 +43,7 @@ from sklearn.decomposition import PCA
 from sklearn.decomposition import TruncatedSVD
 from sklearn.cluster import KMeans
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 from wordcloud import WordCloud, STOPWORDS
 

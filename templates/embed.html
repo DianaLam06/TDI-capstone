@@ -77,7 +77,7 @@ body, html {
     <b>Production companies:</b> {{ movie_production }}
     <br>
     <br>
-      <b>Number of months to wait: <h5>{{ movie_wait_time }} </h5> </b>
+      <b>Buy or Borrow: <h5>{{ movie_wait_time }} </h5> </b>
               </td>
               
               <td valign="middle", width="550">
@@ -96,8 +96,8 @@ body, html {
   <h3>The Developer</h3>
   <p>Diana Lam got her PhD in Biostatistics from the University of North Carolina at Chapel Hill.  She worked on statistical methodology releated to missing data and time-to-event analyses in randomized clinical trails with Gary Koch during her time at UNC. Recently, she completed a Fellowship at The Data Incubator and learned a lot of skills she never dreamed she'd have, such as the skills to make this web app.<br /><br />
     
-    When she is not honing her new skills in Python and machine learning, Diana enjoys taking advantage of our civic institutions, such as reading in librairies, riding her bike in bike lanes, and playing Ultimate Frisbee in parks.</p>
-  <img src="{{ url_for('static', filename = 'Lam_Diana.jpg') }}" alt="Picture of Diana" width="500" height="600">
+    When she is not honing her new skills in Python and machine learning, Diana enjoys taking advantage of public works, such as reading in librairies, riding her bike in bike lanes, and playing Ultimate Frisbee in parks.</p>
+  <img src="{{ url_for('static', filename = 'Lam_Diana.jpg') }}" alt="Picture of Diana" width="400" height="480">
     
 </div>
 
@@ -106,7 +106,7 @@ body, html {
     <p> The trailer for the movie "Crazy Rich Asians" recently dropped, and if you were thinking about borrowing the book from the library, well, good luck.  When movies come out, demnad for the book at the library sky rockets.  I call this the movie-based popularity of a book.  <br /><br />
     
     For example, the book "The Maze Runner" came out in 2009, and the movie dropped in late 2014. We can see from the graph that demand for the book at the library increases even before the movie is released in theaters. The demand for the book is still strong even 2 years after the release of the movie
-  <img src="{{ url_for('static', filename = 'maze_runner.jpg') }}" alt="Maze-Runner graph" width="500" height="600" >
+  <img src="{{ url_for('static', filename = 'maze_runner.jpg') }}" alt="Maze-Runner graph" width="600" height="500" >
     <br /><br />
     
    Now if you're a reader like me, who likes to take your time when you read, then you'll want to wait until the movie-based popularity of the book has passed.  That way, when you check the book out at the library, you'll have a reasonable chance of being able to renew the book.  With Buy or Borrow, you can see whether or not the movie-based popularity of a book will pass within the year, or if not, whether you're better off just buying the book to read at a leisurely pace
@@ -115,7 +115,16 @@ body, html {
     <h3> Data </h3>
     <p> I got a list of movies based on a novel by scraping a movie list from IMDB.com that had "based on a" in the keywords.   I then used the merged the list from IMDB.com with movie details from TMDB.com, as the TMDB API allowed me to easily look up movie details, such as the release date, movie-rating, genre, and keywords.  
     <br /><br />
-        I then used the list of movie titles to filter the 6.6 GB of checkout data from the Seattle Public Library (SPL).  I used Spark to filter the large data set. As my outcome was the number of months you would have to wait past the movie release until the number of checkouts in SPL was less than the number of copies of the book for 2 consecutive months, I also needed ot know the inventory count of the books.  The count of books in the system was also available as a data set from SPL.  Different editions of the book were counted as the same book, assuming the content did not change drastically from edition to edition
+        I then used the list of movie titles to filter the 6.6 GB of checkout data from the Seattle Public Library (SPL).  The SPL checkout data provides the title, number of checkouts, for every month from 2005 to present. I used Spark to filter the large data set. As my initial outcome was the number of months you would have to wait past the movie release until the number of checkouts in SPL was less than the number of copies of the book for 2 consecutive months, I also needed to know the inventory count of the books.  The count of books in the system was also available as a data set from SPL.  Different editions of the book were counted as the same book, assuming the content did not change drastically from edition to edition
+
+        <br /><br />
+        My data structure consisted of a movie title, with the release date, MPAA rating, production company, movie-keywords, the inventory count of the corresponding book title in the SPL, and the number of months between the movie's release and the first month of 2 consecutive months where monthly checkout was less than the number of inventory copies.   
+    </p>
+    
+    <h3> Machine Learning </h3>
+    <p>
+       With the more popular books, the demand might not go down even 2 years after the movie has been released.  This happens more often with books that are part of a series, in which sequels can renew interest in the earlier books of the series.  I decided that as a reader, I probably would not be interested in a book if I had to a year, so I made the outcome binary: would the book be available at the library in less than a year or a year or more.  <br /><br />
+       I looked at a b
     </p>
 </div>
 
