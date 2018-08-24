@@ -47,13 +47,13 @@ def plot():
     axis = fig.add_subplot(1, 1, 1)
 
     xs = range(100)
-    ys = [random.randint(1, 50) for x in xs]
+    ys = [np.random.randint(1, 50) for x in xs]
 
     axis.plot(xs, ys)
     canvas = FigureCanvas(fig)
     output = StringIO.StringIO()
     canvas.print_png(output)
-    response = make_response(output.getvalue())
+    response = flask.make_response(output.getvalue())
     response.mimetype = 'image/png'
     return response
 
@@ -73,18 +73,17 @@ def index():
     cluster_indiv = km4.predict(X_indiv).item(0)
     predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
     
-    result_dict['wait_time'] = result_dict['release_date']
     
-    '''
-    if result_dict['release_date'].year - datetime.datetime.today().year > 2 :
-        result_dict['wait_time'] = 'Movie was released more than 2 years ago, demand should be reasonable unless book is part of a series'
+    if datetime.datetime.today().year - result_dict['release_date'].year > 5 :
+        result_dict['wait_time'] = 'Movie was released more than 5 years ago, demand should be reasonable'
     elif predict_indiv == 0:
         result_dict['wait_time'] = 'Borrow, expected wait at library less than a year'
     elif predict_indiv == 1:
         result_dict['wait_time'] = 'Buy, expected wait longer than a year'
     else :
         result_dict['wait_time'] = 'No prediction, missing feature information'
-   '''
+   
+    result_dict['wait_time'] = [X_indiv['genre_name'], X_indiv['certification']]
 
 
 
