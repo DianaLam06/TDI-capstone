@@ -165,16 +165,6 @@ logistic_genre_cert_PCA = Pipeline([
 logistic_genre_cert_PCA.fit(data, binary12)
 
 
-# get logistic regression;
-genre_list =['action', 'comedy']
-cert = ['pg-13']
-
-d ={'genre_name': [genre_list ], 'certification' : [cert]}
-X_indiv = pd.DataFrame(d)
-
-
-predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
-
 km4 = Pipeline([
     ('genre_cert', genre_cert),
     ('svd', TruncatedSVD(n_components = 2)),  
@@ -184,8 +174,6 @@ km4 = Pipeline([
 
 km4.fit(data)
 
-
-cluster_indiv = km4.predict(X_indiv).item(0)
 
 data.loc[:,'binary12'] = data['num_months_wait'].apply(makeBinary)
 

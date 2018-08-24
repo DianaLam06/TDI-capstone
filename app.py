@@ -164,8 +164,17 @@ def index():
 
     # Get all the form arguments in the url with defaults
     inputted_string = getitem(args, 'movie_name', ' ')
-
     result_dict = getAPIdata(inputted_string)
+    
+    d ={'genre_name':result_dict['genre'], 'certification' : result_dict['certification']}
+    X_indiv = pd.DataFrame(d)
+    cluster_indiv = km4.predict(X_indiv).item(0)
+    if cluster_indiv == 0:
+        result_dict['wait_time'] = 'Borrow, expected wait at library less than a year'
+    else:
+        result_dict['wait_time'] = 'Buy, expected wait longer than a year'
+
+    predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
 
     # resources = INLINE.render()
     # script, div = components(fig)
