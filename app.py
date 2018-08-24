@@ -22,6 +22,7 @@ from os.path import dirname, join
 import requests
 from io import BytesIO
 from PIL import Image
+import datetime
 
 
 app = flask.Flask(__name__)
@@ -61,11 +62,15 @@ def getRating(deets):
     input: deets, a json containing the movie details
     output: dictionary with certification
     '''
-   
-    
-    for item in deets['release_dates']['results']:
-        if item.values()[0] == u'US':
-            return item.values()[1][1]['certification']
+    try:
+        if 'release_dates' in deets.keys():
+            for item in deets['release_dates']['results']:
+                if item.values()[0] == u'US':
+                    for subitem in item.values()[1]:
+                        if subitem['certification'] != u'':
+                            return subitem['certification']
+    except AttributeError:
+        return 'No rating found'
     
 
 
@@ -105,22 +110,25 @@ def getPoster(resp):
     img = Image.open(BytesIO(URL.content))
     return full_path
 
-def getReleaseDate(deets):
+def getReleaseDateWithEmpty(deets):
     '''
     input: json with movie details
     otuput: release date
     '''
     if 'release_dates' in deets.keys() and 'results' in deets['release_dates'].keys():
         for item in deets['release_dates']['results']:
-            if item.values()[0] == u'US':
-                for subitem in item.values()[1]:
-                    if subitem['certification'] != u'':
+            try:
+                if item.values()[0] == u'US':
+                    for subitem in item.values()[1]:
+                        if subitem['certification'] != u'':
 
-                        s = item.values()[1][0]['release_date']
+                            s = item.values()[1][0]['release_date']
 
-                        s_short = re.search(u'\d{4}-\d{2}-\d{2}', s).group()
-                        t = datetime.strptime(s_short, u"%Y-%m-%d")
-                        return t
+                            s_short = re.search(u'\d{4}-\d{2}-\d{2}', s).group()
+                            t = datetime.datetime.strptime(s_short, u"%Y-%m-%d")
+                            return t
+            except AttributeError:
+                return 'No release date found'
 
 
 def getAPIdata(string):
@@ -148,6 +156,7 @@ def getAPIdata(string):
         genre_html = getGenre(details)
         production = getProduction(details)
         poster = getPoster(response)
+        release_date = getReleaseDateWithEmpty(details)
         
         
     if string.lower() == "crazy rich asians":
@@ -192,7 +201,7 @@ def index():
     elif predict_indiv == 1:
         result_dict['wait_time'] = 'Buy, expected wait longer than a year'
     else :
-        result_dict['wait_time'] = 'No prediction'
+        result_dict['wait_time'] = 'No prediction, missing feature information'
 
 
 
