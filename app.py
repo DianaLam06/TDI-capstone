@@ -106,4 +106,5 @@ def index():
 
 if __name__ == '__main__':
     print(__doc__)
-    app.run(port=33507)
+    #app.run(port=33507)
+    app.run(port=0.0.0.0)
