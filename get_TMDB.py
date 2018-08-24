@@ -132,6 +132,7 @@ def getAPIdata(string):
     if string.lower() == "crazy rich asians":
         rating = "PG-13"
         production = "Color Force, SK Global, Warner Bros."
+        release_date = datetime.datetime.strptime('2018-08-15', '%Y-%m-%d')
         
 
 

@@ -69,8 +69,10 @@ def index():
     
     d ={'genre_name':[result_dict['genre']], 'certification' : [result_dict['rating']]}
     X_indiv = pd.DataFrame(d)
-    cluster_indiv = km4.predict(X_indiv).item(0)
-    predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
+    #cluster_indiv = km4.predict(X_indiv).item(0)
+    #predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
+    cluster_indiv = 1
+    pedict_indiv = 0
   
     if result_dict['release_date'].year - datetime.datetime.today().year > 2 :
         result_dict['wait_time'] = 'Movie was released more than 2 years ago, demand should be reasonable unless book is part of a series'
