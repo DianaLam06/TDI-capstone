@@ -220,7 +220,7 @@ wordcloud = [WordCloud(width = 800, height = 800,
                 min_font_size = 10).generate(comment_words[i]) for i in range(4)]
 
 
-
+'''
 matplotlib.pyplot.figure(figsize = (8, 8), facecolor = None)
 matplotlib.pyplot.imshow(wordcloud[cluster_indiv])
 matplotlib.pyplot.axis("off")
@@ -230,3 +230,4 @@ matplotlib.pyplot.tight_layout(pad = 0)
 data_indiv = data_all[data_all['cluster4'] == cluster_indiv]
 
 data_indiv['num_months_wait12'].hist( normed = True)
+'''
