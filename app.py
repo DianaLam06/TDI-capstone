@@ -174,7 +174,85 @@ def getAPIdata(string):
    
   
     return all_details
+
+class ColumnSelectTransformer(base.BaseEstimator, base.TransformerMixin):
     
+    def __init__(self, col_names):
+        self.col_names = col_names  # We will need these in transform()
+       
+    def fit(self, X, y = None):
+        # This transformer doesn't need to learn anything about the data,
+        # so it can just return self without any further processing
+        
+        return self
+    
+    def transform(self, X):
+        # Return an array with the same number of rows as X and one
+        # column for each in self.col_names
+        # want to return an array that has the data from the column names fed in
+        self.X = X
+        
+        transform = X[self.col_names]
+
+        return transform
+    
+class DictEncoder(base.BaseEstimator, base.TransformerMixin):
+    
+    def fit(self, X, y=None):
+        return self
+       
+    def transform(self, X):
+        # inputs X: pd.Series
+        # outputs list of dicts
+        if len(X) > 1:
+            X_series = X.squeeze()
+            X_word_list = list( X_series.str.split(','))
+            return [{name.strip() : 1 for name in lists_ if name is not ""} \
+                  for lists_ in X_word_list ]
+        
+        else:
+            X_word_list = X.squeeze()
+            return [{word: 1 for word in X_word_list if word is not ""} ]
+        
+book_movie = pd.read_csv("/data/book_movie_full.csv")
+
+
+data_pre = book_movie[["production_names", "genre_name", "certification",\
+                       'num_months_wait', 'simpleTitleBook', 'keyword_name']]
+
+
+def censor24(num_months):
+    if num_months <= 24:
+        num_months_wait24 = num_months
+    else:
+        num_months_wait24 = 24
+    return num_months_wait24
+
+def censor12(num_months):
+    if num_months <= 12:
+        num_months_wait12 = num_months
+    else:
+        num_months_wait12 = 12
+    return num_months_wait12
+
+def makeBinary(num_months):
+    return 0 if num_months <=12 else 1
+        
+        
+
+data_pre.at[:,'num_months_wait24'] = data_pre['num_months_wait'].apply(censor24)
+data_pre.at[:,'num_months_wait12'] = data_pre['num_months_wait'].apply(censor12)
+#data_pre['binary12'] = data_pre['num_months_wait'].apply(makeBinary)
+data_outcome = data_pre.dropna()
+
+#data = data_outcome.drop(labels=['num_months_wait'], axis = 1)
+data = data_outcome
+outcome = data_outcome['num_months_wait']
+
+
+outcome24  = outcome.apply(censor24)
+outcome12 = outcome.apply(censor12)
+binary12 = outcome.apply(makeBinary)
 
 @lru_cache()
 
