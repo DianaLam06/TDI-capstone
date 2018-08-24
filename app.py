@@ -166,7 +166,7 @@ def index():
     inputted_string = getitem(args, 'movie_name', ' ')
     result_dict = getAPIdata(inputted_string)
     
-    d ={'genre_name':result_dict['genre'], 'certification' : result_dict['rating']}
+    d ={'genre_name':[result_dict['genre']], 'certification' : [result_dict['rating']]}
     X_indiv = pd.DataFrame(d)
     cluster_indiv = km4.predict(X_indiv).item(0)
     if cluster_indiv == 0:
