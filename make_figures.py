@@ -91,9 +91,11 @@ class DictEncoder(base.BaseEstimator, base.TransformerMixin):
             return [{name.strip() : 1 for name in lists_ if name is not ""} \
                   for lists_ in X_word_list ]
         
-        else:
+        elif len(X) == 1:
             X_word_list = X.squeeze()
             return [{word: 1 for word in X_word_list if word is not ""} ]
+        else :
+            return 'help'
        
         
 
