@@ -73,7 +73,7 @@ def index():
     cluster_indiv = km4.predict(X_indiv).item(0)
     predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
     
-    result_dict['wait_time'] = 'causing problems'
+    result_dict['wait_time'] = result_dict['release_date']
     
     '''
     if result_dict['release_date'].year - datetime.datetime.today().year > 2 :
