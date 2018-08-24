@@ -87,14 +87,13 @@ def getReleaseDateWithEmpty(deets):
         for item in deets['release_dates']['results']:
             try:
                 if item.values()[0] == u'US':
-                    for subitem in item.values()[1]:
-                        if subitem['certification'] != u'':
+                    for subitem in item['release_dates']:
+                        s = subitem['release_date']
 
-                            s = item.values()[1][0]['release_date']
-
-                            s_short = re.search(u'\d{4}-\d{2}-\d{2}', s).group()
-                            t = datetime.datetime.strptime(s_short, u"%Y-%m-%d")
-                            return t
+                        s_short = re.search(u'\d{4}-\d{2}-\d{2}', s).group()
+                        t = datetime.datetime.strptime(s_short, u"%Y-%m-%d")
+                        return t
+                    
             except AttributeError:
                 return datetime.datetime.today()
 
