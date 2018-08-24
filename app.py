@@ -57,9 +57,10 @@ def plot():
     
     X_indiv = pd.DataFrame(d)
     cluster_indiv = km4.predict(X_indiv).item(0)
+    print(cluster_indiv)
     
     fig = Figure()
-    axis = fig.add_subplot(2, 1, 1)
+    axis = fig.add_subplot(1, 1, 1)
     axis.imshow(wordcloud[cluster_indiv])
     axis.axis("off")
        
@@ -82,6 +83,7 @@ def index():
     inputted_string = getitem(args, 'movie_name', ' ')
     result_dict = getAPIdata(inputted_string)
     
+    
     d ={'genre_name':[result_dict['genre'].split(',')], 'certification' : [result_dict['rating'].split(',')]}
 
     
@@ -99,7 +101,7 @@ def index():
         result_dict['wait_time'] = 'Buy, expected wait longer than a year'
     else :
         result_dict['wait_time'] = 'No prediction, missing feature information'
-    result_dict['wait_time'] = cluster_indiv
+    #result_dict['wait_time'] = cluster_indiv
     
 
 
