@@ -1,7 +1,7 @@
 import re
 import numpy as np
 import pandas as pd
-import matplotlib as plt
+import matplotlib 
 from collections import defaultdict, Counter
 
 
@@ -221,10 +221,10 @@ wordcloud = [WordCloud(width = 800, height = 800,
 
 
 
-plt.pyplot.figure(figsize = (8, 8), facecolor = None)
-plt.pyplot.imshow(wordcloud[cluster_indiv])
-plt.pyplot.axis("off")
-plt.pyplot.tight_layout(pad = 0)
+matplotlib.pyplot.figure(figsize = (8, 8), facecolor = None)
+matplotlib.pyplot.imshow(wordcloud[cluster_indiv])
+matplotlib.pyplot.axis("off")
+matplotlib.pyplot.tight_layout(pad = 0)
  
 
 data_indiv = data_all[data_all['cluster4'] == cluster_indiv]
