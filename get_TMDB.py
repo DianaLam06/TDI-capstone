@@ -52,10 +52,6 @@ def getGenre(deets):
     
     
 
-
-# In[9]:
-
-
 def getProduction(deets):
     '''
     input: deets, a json containing movie details from ID grab
@@ -108,6 +104,8 @@ def getAPIdata(string):
         production = " "
         poster = 'http://4.bp.blogspot.com/--vVGyhWo610/VLcuSaQZROI/AAAAAAAAADg/6mYoDt05hJg/s1600/booksvsmovies.jpg'
         wait_time = " "
+        release_date = ' '
+        
        
      
     else:
