@@ -66,13 +66,15 @@ def index():
     # Get all the form arguments in the url with defaults
     inputted_string = getitem(args, 'movie_name', ' ')
     result_dict = getAPIdata(inputted_string)
-    
-    d ={'genre_name':[result_dict['genre']], 'certification' : [result_dict['rating']]}
+    if len(result_dict['genre']) == 1:
+        d ={'genre_name':[result_dict['genre']], 'certification' : [result_dict['rating']]}
+    elif len(result_dict['genre']) > 1:
+        d = {'genre_name':[genre for genre in result_dict['genre']], 'certification' : [result_dict['rating']]}
     X_indiv = pd.DataFrame(d)
-    cluster_indiv = km4.predict(X_indiv).item(0)
-    predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
+    #cluster_indiv = km4.predict(X_indiv).item(0)
+    #predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
     
-    result_dict['wait_time'] = cluster_indiv
+    result_dict['wait_time'] = X_indiv
     
     '''
     if result_dict['release_date'].year - datetime.datetime.today().year > 2 :
