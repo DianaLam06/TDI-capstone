@@ -1,6 +1,4 @@
 from __future__ import print_function
-from make_figures import *
-from get_TMDB import * 
 # need to figure out why atonement, the maze runner, and divergent are not working
 # may be multiple responses from first requests.get?
 
@@ -27,6 +25,9 @@ import datetime
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import StringIO
+
+from make_figures import *
+from get_TMDB import * 
 
 app = flask.Flask(__name__)
 

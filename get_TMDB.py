@@ -1,4 +1,3 @@
-
 def getMovieID(response):
     '''
     input: response from requests.get, used to get numeric id of movie
