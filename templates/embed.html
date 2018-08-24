@@ -127,9 +127,16 @@ body, html {
     <h3> Machine Learning </h3>
     <p>
        With the more popular books, the demand might not go down even 2 years after the movie has been released.  This happens more often with books that are part of a series, in which sequels can renew interest in the earlier books of the series.  I decided that as a reader, I probably would not be interested in a book if I had to a year, so I made the outcome binary: would the book be available at the library in less than a year or a year or more.  <br /><br />
-       The features I considered were production company, keywords, genre, and production company.  In order to reduce the dimensionality, I did a truncated SVD with a grid search to tune the hyperparameters.  In the end, the truncated SVD with 2 components consisting of genre and certification had the most reliable performance.  
+       The features I considered were movie rating, production company, keywords, genre, and production company.  In order to reduce the dimensionality, I did a truncated SVD with a grid search to tune the hyperparameters.  In the end, the truncated SVD with 2 components consisting of genre and movie rating had the most reliable performance.  
         <br /><br />
-        I looked at both logistic regression and Random Forest Classifier.  The grid search suggested that 2 components from the truncated SVD combined with a logistic regression using L2 penalty and 0.1 regularization performed best.  
+        I looked at both logistic regression and Random Forest Classifier, and decided to use logistic regression as the performance for both was similar.  The grid search suggested that 2 components from the truncated SVD combined with a logistic regression using L2 penalty and 0.1 regularization performed best.  Books whose movie was released 5 or more years ago do not have a buy or borrow prediction as I assumed that the movie-based popularity would have passed by now.
+    </p>
+    
+    <h3> Clustering</h3>
+    <p>
+       In addition to the machine learning, I also explored the data with some K-means cluster analysis.  I considered having 3, 4, and 5 clusters, and decided that 4 clusters worked best.  I used the same features that went into the machine learning (genre, and rating) and reduced the dimension to 2 components using truncated SVD.  The movies boil down to 4 groups: children's movies/ fantasy, romantic movies and period dramas, thrillers, and dramas.  The word cloud was made by combining the movie key-words for each cluster.
+        
+    
     </p>
 </div>
 
