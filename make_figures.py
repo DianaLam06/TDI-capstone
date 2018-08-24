@@ -17,7 +17,7 @@ from sklearn.cluster import KMeans
 #import matplotlib.pyplot as plt
 
 from wordcloud import WordCloud, STOPWORDS
-%matplotlib inline
+
 
 book_movie = pd.read_csv("./data/book_movie_full.csv")
 
