@@ -106,7 +106,7 @@ body, html {
     <p> The trailer for the movie "Crazy Rich Asians" recently dropped, and if you were thinking about borrowing the book from the library, well, good luck.  When movies come out, demnad for the book at the library sky rockets.  I call this the movie-based popularity of a book.  <br /><br />
     
     For example, the book "The Maze Runner" came out in 2009, and the movie dropped in late 2014. We can see from the graph that demand for the book at the library increases even before the movie is released in theaters. The demand for the book is still strong even 2 years after the release of the movie
-  <img src="{{ url_for('static', filename = 'maze_runner.jpg') }}" alt="Maze-Runner graph" width="600" height="500" >
+  <img src="{{ url_for('static', filename = 'maze_runner.jpg') }}" alt="Maze-Runner graph" width="800" height="500" >
     <br /><br />
     
    Now if you're a reader like me, who likes to take your time when you read, then you'll want to wait until the movie-based popularity of the book has passed.  That way, when you check the book out at the library, you'll have a reasonable chance of being able to renew the book.  With Buy or Borrow, you can see whether or not the movie-based popularity of a book will pass within the year, or if not, whether you're better off just buying the book to read at a leisurely pace
@@ -124,7 +124,9 @@ body, html {
     <h3> Machine Learning </h3>
     <p>
        With the more popular books, the demand might not go down even 2 years after the movie has been released.  This happens more often with books that are part of a series, in which sequels can renew interest in the earlier books of the series.  I decided that as a reader, I probably would not be interested in a book if I had to a year, so I made the outcome binary: would the book be available at the library in less than a year or a year or more.  <br /><br />
-       I looked at a b
+       The features I considered were production company, keywords, genre, and production company.  In order to reduce the dimensionality, I did a truncated SVD with a grid search to tune the hyperparameters.  In the end, the truncated SVD with 2 components consisting of genre and certification had the most reliable performance.  
+        <br /><br />
+        I looked at both logistic regression and Random Forest Classifier.  The grid search suggested that 2 components from the truncated SVD combined with a logistic regression using L2 penalty and 0.1 regularization performed best.  
     </p>
 </div>
 
