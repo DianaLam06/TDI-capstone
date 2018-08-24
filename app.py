@@ -43,13 +43,25 @@ def getitem(obj, item, default):
 
 @app.route('/plot.png')
 def plot():
+    
+    args = flask.request.args
+
+    # Get all the form arguments in the url with defaults
+    inputted_string = getitem(args, 'movie_name', ' ')
+    result_dict = getAPIdata(inputted_string)
+    
+    d ={'genre_name':[result_dict['genre'].split(',')], 'certification' : [result_dict['rating'].split(',')]}
+
+    
+    X_indiv = pd.DataFrame(d)
+    cluster_indiv = km4.predict(X_indiv).item(0)
     fig = Figure()
     axis = fig.add_subplot(1, 1, 1)
 
-    xs = range(100)
+    xs = range(3 + cluster_indiv)
     ys = [np.random.randint(1, 50) for x in xs]
 
-    axis.plot(xs, ys)
+    axis.hist(
     canvas = FigureCanvas(fig)
     output = StringIO.StringIO()
     canvas.print_png(output)
@@ -67,11 +79,13 @@ def index():
     inputted_string = getitem(args, 'movie_name', ' ')
     result_dict = getAPIdata(inputted_string)
     
-    d ={'genre_name':[result_dict['genre']], 'certification' : [result_dict['rating']]}
+    d ={'genre_name':[result_dict['genre'].split(',')], 'certification' : [result_dict['rating'].split(',')]}
+
     
     X_indiv = pd.DataFrame(d)
     cluster_indiv = km4.predict(X_indiv).item(0)
-    predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
+    predict_indiv = logistic_genre_cert_PCA.predict(X_indiv)
+    #result_dict['wait_time'] = predict_indiv
     
     
     if datetime.datetime.today().year - result_dict['release_date'].year > 5 :
@@ -83,7 +97,7 @@ def index():
     else :
         result_dict['wait_time'] = 'No prediction, missing feature information'
    
-    result_dict['wait_time'] = [X_indiv['genre_name'], X_indiv['certification']]
+    result_dict['wait_time'] = cluster_indiv
 
 
 
@@ -106,4 +120,6 @@ def index():
 if __name__ == '__main__':
     print(__doc__)
     app.run(port=33507, host = '0.0.0.0')
+    
+    
     
