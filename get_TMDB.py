@@ -96,7 +96,7 @@ def getReleaseDateWithEmpty(deets):
                             t = datetime.datetime.strptime(s_short, u"%Y-%m-%d")
                             return t
             except AttributeError:
-                return 'No release date found'
+                return datetime.datetime.today()
 
 
 def getAPIdata(string):
