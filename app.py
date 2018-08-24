@@ -105,7 +105,22 @@ def getPoster(resp):
     img = Image.open(BytesIO(URL.content))
     return full_path
 
+def getReleaseDate(deets):
+    '''
+    input: json with movie details
+    otuput: release date
+    '''
+    if 'release_dates' in deets.keys() and 'results' in deets['release_dates'].keys():
+        for item in deets['release_dates']['results']:
+            if item.values()[0] == u'US':
+                for subitem in item.values()[1]:
+                    if subitem['certification'] != u'':
 
+                        s = item.values()[1][0]['release_date']
+
+                        s_short = re.search(u'\d{4}-\d{2}-\d{2}', s).group()
+                        t = datetime.strptime(s_short, u"%Y-%m-%d")
+                        return t
 
 
 def getAPIdata(string):
@@ -133,7 +148,7 @@ def getAPIdata(string):
         genre_html = getGenre(details)
         production = getProduction(details)
         poster = getPoster(response)
-        wait_time = 6
+        
         
     if string.lower() == "crazy rich asians":
         rating = "PG-13"
@@ -147,8 +162,7 @@ def getAPIdata(string):
     all_details['genre'] = genre_html
     all_details['poster'] = poster
     all_details['production'] = production
-    all_details['wait_time'] = wait_time
-   
+    all_details['release_date'] = release_date
   
     return all_details
 
@@ -169,12 +183,18 @@ def index():
     d ={'genre_name':[result_dict['genre']], 'certification' : [result_dict['rating']]}
     X_indiv = pd.DataFrame(d)
     cluster_indiv = km4.predict(X_indiv).item(0)
-    if cluster_indiv == 0:
-        result_dict['wait_time'] = 'Borrow, expected wait at library less than a year'
-    else:
-        result_dict['wait_time'] = 'Buy, expected wait longer than a year'
-
     predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
+    
+    if result_dict['release_date'].year - datetime.datetime.today().year > 2 :
+        result_dict['wait_time'] = 'Movie was released more than 2 years ago, demand should be reasonable unless book is part of a series'
+    elif predict_indiv == 0:
+        result_dict['wait_time'] = 'Borrow, expected wait at library less than a year'
+    elif predict_indiv == 1:
+        result_dict['wait_time'] = 'Buy, expected wait longer than a year'
+    else :
+        result_dict['wait_time'] = 'No prediction'
+
+
 
     # resources = INLINE.render()
     # script, div = components(fig)
