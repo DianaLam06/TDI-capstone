@@ -98,7 +98,7 @@ def index():
         movie_genre = result_dict['genre'],
         movie_production = result_dict['production'],
         movie_poster = result_dict['poster'],
-        movie_wait_time = result_dict['wait_time']
+        movie_wait_time = result_dict['wait_time'],
         movie_release_date = result_dict['release_date']
     )
     
