@@ -142,5 +142,6 @@ def getAPIdata(string):
     all_details['poster'] = poster
     all_details['production'] = production
     all_details['release_date'] = release_date
+    all_details['wait_time'] = release_date.year - datetime.datetime.today().year
   
     return all_details
