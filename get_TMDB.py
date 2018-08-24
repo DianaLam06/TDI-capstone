@@ -1,5 +1,9 @@
 import datetime
 import re
+import requests
+from io import BytesIO
+from PIL import Image
+
 
 def getMovieID(response):
     '''
