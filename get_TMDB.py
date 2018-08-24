@@ -104,7 +104,7 @@ def getAPIdata(string):
         production = " "
         poster = 'http://4.bp.blogspot.com/--vVGyhWo610/VLcuSaQZROI/AAAAAAAAADg/6mYoDt05hJg/s1600/booksvsmovies.jpg'
         wait_time = " "
-        release_date = ' '
+        release_date = datetime.datetime.today()
         
        
      

@@ -70,15 +70,17 @@ def index():
     X_indiv = pd.DataFrame(d)
     cluster_indiv = km4.predict(X_indiv).item(0)
     predict_indiv = logistic_genre_cert_PCA.predict(X_indiv).item(0)
-    
-    if result_dict['release_date'].year - datetime.datetime.today().year > 2 :
-        result_dict['wait_time'] = 'Movie was released more than 2 years ago, demand should be reasonable unless book is part of a series'
-    elif predict_indiv == 0:
-        result_dict['wait_time'] = 'Borrow, expected wait at library less than a year'
-    elif predict_indiv == 1:
-        result_dict['wait_time'] = 'Buy, expected wait longer than a year'
-    else :
-        result_dict['wait_time'] = 'No prediction, missing feature information'
+    try:
+        if result_dict['release_date'].year - datetime.datetime.today().year > 2 :
+            result_dict['wait_time'] = 'Movie was released more than 2 years ago, demand should be reasonable unless book is part of a series'
+        elif predict_indiv == 0:
+            result_dict['wait_time'] = 'Borrow, expected wait at library less than a year'
+        elif predict_indiv == 1:
+            result_dict['wait_time'] = 'Buy, expected wait longer than a year'
+        else :
+            result_dict['wait_time'] = 'No prediction, missing feature information'
+    except AttributeError:
+        continue
 
 
 
